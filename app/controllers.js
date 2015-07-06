@@ -102,7 +102,7 @@ game.controller('gameCtrl', ['$scope', '$http', '$element',
              $scope.popupMsg = 'YOU WON!';
              $('#win-model').openModal();
         }else{
-          if(val === 10){
+          if(val === 7){
             $scope.popupMsg = 'YOU LOST!';
             $('#win-model').openModal();
           }
@@ -180,7 +180,7 @@ var gameBoard = {
     },
 
     getBoardSize: function(screenWidth, screenHeight, boardPercentage){
-      var numT = 10
+      var numT = 7
       var numPoints = 4
 
       var boardWidth = Math.round((boardPercentage / 100) * screenWidth);

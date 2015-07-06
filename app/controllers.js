@@ -119,15 +119,15 @@ game.controller('gameCtrl', ['$scope', '$http', '$element',
           id = i+1
           $element.find('.comb'+ id +' .spin-ball').css('background', color);
       }*/
-      if(!_combinationSet.length){
-        _combinationSet = _combination.slice(0);
-        unlocledRow = 1;
-        $element.find('.resid11-5 .go-button').css('display', 'none');
-      }
+        if(unlockButton === 1) {
+          _combinationSet = _combination.slice(0);
+          unlocledRow = 1;
+          _combination = [0,0,0,0];
+          $element.find('.resid11-5 .go-button').css('display', 'none');
+        }
     };
 
     $scope.hiddeComb = function(){
-      console.log('in combinate!'+$( ".hidde-comb" ).width());
       if(_combinationSet.length){
         if(!$( ".hidde-comb" ).width()){
           $( ".hidde-comb" ).animate({

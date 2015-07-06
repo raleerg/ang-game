@@ -1,0 +1,69 @@
+#game-table {
+    float: left;
+    border: 2px #000 solid;
+}
+#combination {
+  position: relative;
+    float: left;
+    margin-top: 5px;
+    border: 2px #000 solid;
+}
+#pinbox {
+  position: absolute;
+  right: 0;
+  margin-right: 5px;
+  border: 2px #000 solid;
+}
+.pin, .spin-ball {
+    position: relative;
+    display: block;
+    float: left;
+    background: #d1d1d1;
+}
+.res {
+  display: block;
+  float: left;
+  background: #a7a7a7;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+.spin-ball {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+.red-pin { background: #CC3300; }
+.green-pin { background: #009900; }
+.brown-pin { background: #663300; }
+.blue-pin { background: #0099FF; }
+.gray-pin { background: #A7A7A7; }
+.purple-pin { background: #5C005C; }
+.empty-pin { background: #d1d1d1; }
+.board-row {
+  width: 100%;
+  float: left;
+}
+.container .row {
+  margin-bottom: 0;
+  padding-top: 10px;
+}
+.go-button, .set-button {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: #fff;
+}
+.set-button {
+  display: block;
+}
+.hidde-comb {
+  position: absolute;
+  width: 0px;
+  top:0;
+  left:0;
+  background: #000;
+  z-index: 200;
+}

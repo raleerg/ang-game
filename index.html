@@ -1,0 +1,55 @@
+  <!DOCTYPE html>
+  <html lang="en" ng-app="gameApp">
+    <head>
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="css/style.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+        <div ng-view>
+
+        </div>
+      <script type="text/javascript" src="js/jquery.min.js"></script>
+      <script src="js/socket.io.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+
+      <script src="js/angular.js"></script>
+      <script src="js/angular-route.js"></script>
+      <script src="js/socket.js"></script>
+
+      <script type="text/javascript" src="app/app.js"></script>
+      <script type="text/javascript" src="app/controllers.js"></script>
+      <script type="text/javascript">
+            window.onload = function() {
+                /*var welcome = document.getElementById("welcome");
+                var allUsers = document.getElementById("users");
+                var progress = $('.pin');
+                var results = document.getElementById("results");
+
+                var socket = io.connect('http://localhost:3250');
+                socket.on('welcome', function (data) {
+                    console.log(data);
+                    welcome.innerHTML = "Welcome to the game <strong>" + data.name + "</strong>";
+                });
+                socket.on('users', function (data) {
+                    allUsers.innerHTML = "<strong>Users:</strong>" + data.users;
+                });
+                socket.on('update', function (data) {
+                    progress.innerHTML = data.currentWidth;
+                    progress.style.width = parseInt(data.currentWidth) + "px";
+                });
+                socket.on('win', function (data) {
+                    results.innerHTML = data.message;
+                });
+
+                progress.on( "click", function() {
+                    socket.emit("click");
+                });*/
+            }
+        </script>
+    </body>
+  </html>

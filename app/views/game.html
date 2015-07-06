@@ -1,0 +1,184 @@
+<div class="container" ng-controller="gameCtrl">
+    <div class="row">
+        <div id="game-table">
+          <div class="board-row">
+            <span class="pin pinid1-1" ng-click="setPinOnBoard([1, 1])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid1-2" ng-click="setPinOnBoard([1, 2])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid1-3" ng-click="setPinOnBoard([1, 3])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid1-4" ng-click="setPinOnBoard([1, 4])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin resid1-5" ng-click="setResult(1)">
+              <img class="go-button" src="media/images/round68.svg" />
+              <span class="res res-1"></span>
+              <span class="res res-2"></span>
+              <span class="res res-3"></span>
+              <span class="res res-4"></span>
+            </span>
+          </div>
+
+          <div class="board-row">
+            <span class="pin pinid2-1" ng-click="setPinOnBoard([2, 1])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid2-2" ng-click="setPinOnBoard([2, 2])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid2-3" ng-click="setPinOnBoard([2, 3])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid2-4" ng-click="setPinOnBoard([2, 4])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin resid2-5" ng-click="setResult(2)">
+              <img class="go-button" src="media/images/round68.svg" />
+              <span class="res res-1"></span>
+              <span class="res res-2"></span>
+              <span class="res res-3"></span>
+              <span class="res res-4"></span>
+            </span>
+          </div>
+
+          <div class="board-row">
+            <span class="pin pinid3-1" ng-click="setPinOnBoard([3, 1])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid3-2" ng-click="setPinOnBoard([3, 2])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid3-3" ng-click="setPinOnBoard([3, 3])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid3-4" ng-click="setPinOnBoard([3, 4])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin resid3-5" ng-click="setResult(3)">
+              <img class="go-button" src="media/images/round68.svg" />
+              <span class="res res-1"></span>
+              <span class="res res-2"></span>
+              <span class="res res-3"></span>
+              <span class="res res-4"></span>
+            </span>
+          </div>
+
+          <div class="board-row">
+            <span class="pin pinid4-1" ng-click="setPinOnBoard([4, 1])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid4-2" ng-click="setPinOnBoard([4, 2])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid4-3" ng-click="setPinOnBoard([4, 3])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid4-4" ng-click="setPinOnBoard([4, 4])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin resid4-5" ng-click="setResult(4)">
+              <img class="go-button" src="media/images/round68.svg" />
+              <span class="res res-1"></span>
+              <span class="res res-2"></span>
+              <span class="res res-3"></span>
+              <span class="res res-4"></span>
+            </span>
+          </div>
+
+          <div class="board-row">
+            <span class="pin pinid5-1" ng-click="setPinOnBoard([5, 1])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid5-2" ng-click="setPinOnBoard([5, 2])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid5-3" ng-click="setPinOnBoard([5, 3])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid5-4" ng-click="setPinOnBoard([5, 4])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin resid5-5" ng-click="setResult(5)">
+              <img class="go-button" src="media/images/round68.svg" />
+              <span class="res res-1"></span>
+              <span class="res res-2"></span>
+              <span class="res res-3"></span>
+              <span class="res res-4"></span>
+            </span>
+          </div>
+
+          <div class="board-row">
+            <span class="pin pinid6-1" ng-click="setPinOnBoard([6, 1])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid6-2" ng-click="setPinOnBoard([6, 2])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid6-3" ng-click="setPinOnBoard([6, 3])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid6-4" ng-click="setPinOnBoard([6, 4])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin resid6-5" ng-click="setResult(6)">
+              <img class="go-button" src="media/images/round68.svg" />
+              <span class="res res-1"></span>
+              <span class="res res-2"></span>
+              <span class="res res-3"></span>
+              <span class="res res-4"></span>
+            </span>
+          </div>
+
+          <div class="board-row">
+            <span class="pin pinid7-1" ng-click="setPinOnBoard([7, 1])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid7-2" ng-click="setPinOnBoard([7, 2])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid7-3" ng-click="setPinOnBoard([7, 3])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid7-4" ng-click="setPinOnBoard([7, 4])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin resid7-5" ng-click="setResult(7)">
+              <img class="go-button" src="media/images/round68.svg" />
+              <span class="res res-1"></span>
+              <span class="res res-2"></span>
+              <span class="res res-3"></span>
+              <span class="res res-4"></span>
+            </span>
+          </div>
+
+          <div class="board-row">
+            <span class="pin pinid8-1" ng-click="setPinOnBoard([8, 1])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid8-2" ng-click="setPinOnBoard([8, 2])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid8-3" ng-click="setPinOnBoard([8, 3])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid8-4" ng-click="setPinOnBoard([8, 4])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin resid8-5" ng-click="setResult(8)">
+              <img class="go-button" src="media/images/round68.svg" />
+              <span class="res res-1"></span>
+              <span class="res res-2"></span>
+              <span class="res res-3"></span>
+              <span class="res res-4"></span>
+            </span>
+          </div>
+
+          <div class="board-row">
+            <span class="pin pinid9-1" ng-click="setPinOnBoard([9, 1])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid9-2" ng-click="setPinOnBoard([9, 2])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid9-3" ng-click="setPinOnBoard([9, 3])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid9-4" ng-click="setPinOnBoard([9, 4])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin resid9-5" ng-click="setResult(9)">
+              <img class="go-button" src="media/images/round68.svg" />
+              <span class="res res-1"></span>
+              <span class="res res-2"></span>
+              <span class="res res-3"></span>
+              <span class="res res-4"></span>
+            </span>
+          </div>
+
+          <div class="board-row">
+            <span class="pin pinid10-1" ng-click="setPinOnBoard([10, 1])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid10-2" ng-click="setPinOnBoard([10, 2])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid10-3" ng-click="setPinOnBoard([10, 3])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin pinid10-4" ng-click="setPinOnBoard([10, 4])"><span class="spin-ball empty-pin"></span></span>
+            <span class="pin resid10-5" ng-click="setResult(10)">
+              <img class="go-button" src="media/images/round68.svg" />
+              <span class="res res-1"></span>
+              <span class="res res-2"></span>
+              <span class="res res-3"></span>
+              <span class="res res-4"></span>
+            </span>
+          </div>
+
+        </div>
+        <div id="pinbox">
+          <span class="pin pinbox-item-1" ng-click="selectPin(1)"><span class="spin-ball red-pin"></span></span>
+          <span class="pin pinbox-item-2" ng-click="selectPin(2)"><span class="spin-ball green-pin"></span></span>
+          <span class="pin pinbox-item-3" ng-click="selectPin(3)"><span class="spin-ball brown-pin"></span></span>
+          <span class="pin pinbox-item-4" ng-click="selectPin(4)"><span class="spin-ball blue-pin"></span></span>
+          <span class="pin pinbox-item-5" ng-click="selectPin(5)"><span class="spin-ball gray-pin"></span></span>
+          <span class="pin pinbox-item-6" ng-click="selectPin(6)"><span class="spin-ball purple-pin"></span></span>
+          <span class="pin pinbox-item-0" ng-click="selectPin(0)"><span class="spin-ball empty-pin"></span></span>
+        </div>
+        <div class="row">
+            <div id="welcome"></div>
+            <div id="users"></div>
+            <div id="results"></div>
+        </div>
+    </div>
+    <div class="row">
+      <div id="combination" ng-click="hiddeComb()">
+        <div class="hidde-comb"></div>
+        <span class="pin pinid11-1" ng-click="setPinOnBoard([11, 1])"><span class="spin-ball empty-pin"></span></span>
+        <span class="pin pinid11-2" ng-click="setPinOnBoard([11, 2])"><span class="spin-ball empty-pin"></span></span>
+        <span class="pin pinid11-3" ng-click="setPinOnBoard([11, 3])"><span class="spin-ball empty-pin"></span></span>
+        <span class="pin pinid11-4" ng-click="setPinOnBoard([11, 4])"><span class="spin-ball empty-pin"></span></span>
+        <span class="pin resid11-5" ng-click="setCombinationInGame()">
+          <img class="go-button" src="media/images/round68.svg" />
+        </span>
+      </div>
+    </div>
+
+    <div id="win-model" class="modal">
+      <div class="modal-content">
+        <h4>{{ popupMsg }}</h4>
+        <p>Do you want another game?</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Yes</a>
+        <a href="" class=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
+      </div>
+    </div>
+
+</div>

@@ -2,7 +2,10 @@
   <html lang="en" ng-app="gameApp">
     <head>
       <!--Import materialize.css-->
+
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="css/jquery.terminal.css"  media="screen,projection"/>
       <link type="text/css" rel="stylesheet" href="css/style.css"  media="screen,projection"/>
 
       <!--Let browser know website is optimized for mobile-->
@@ -13,18 +16,83 @@
         <div ng-view>
 
         </div>
+        <!-- terminal -->
+        <div class="row log-display-box open-terminal">
+          <div class="button-term">
+            <div class="consoleIcon">
+            <svg id="svg-source" width="20" height="20" version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">
+              <use xlink:href="#icon-id-reference"></use>
+              <g id="console" data-iconmelon="Simple Line Icons:3799862b0d8cfb555e3a9985c55f7c04">
+                <g>
+                  <path d="M4.293,5.898c0.812,0,1.472-0.659,1.472-1.471c0-0.81-0.659-1.467-1.472-1.467S2.82,3.618,2.82,4.427
+            		C2.82,5.239,3.48,5.898,4.293,5.898z M4.293,4.109c0.178,0,0.322,0.144,0.322,0.318c0,0.354-0.646,0.354-0.646,0
+            		C3.97,4.253,4.115,4.109,4.293,4.109z"></path>
+                  <path d="M31.426,0H0.574C0.26,0,0,0.259,0,0.574v30.852C0,31.742,0.26,32,0.574,32h30.852
+            		C31.743,32,32,31.742,32,31.425V0.574C32,0.259,31.743,0,31.426,0z M30.851,1.149V7.71H1.149V1.149H30.851z M1.149,30.852V8.858
+            		h29.701v21.994H1.149z"></path>
+                  <path d="M15.948,5.943c0.837,0,1.519-0.68,1.519-1.516c0-0.834-0.682-1.512-1.519-1.512
+            		c-0.835,0-1.513,0.678-1.513,1.512C14.436,5.263,15.113,5.943,15.948,5.943z M15.948,4.063c0.202,0,0.366,0.165,0.366,0.364
+            		c0,0.401-0.728,0.405-0.728,0C15.587,4.228,15.748,4.063,15.948,4.063z"></path>
+                  <path d="M4.692,11.733c-0.229-0.218-0.594-0.213-0.812,0.014c-0.22,0.229-0.214,0.592,0.014,0.811l3.575,3.447
+            		l-3.444,3.444c-0.224,0.224-0.224,0.588,0,0.812c0.115,0.112,0.261,0.168,0.408,0.168s0.292-0.056,0.404-0.168l4.269-4.27
+            		L4.692,11.733z"></path>
+                  <path d="M12.143,19.281H8.29c-0.317,0-0.574,0.258-0.574,0.574c0,0.315,0.257,0.574,0.574,0.574h3.853
+            		c0.312,0,0.571-0.258,0.571-0.574C12.714,19.539,12.454,19.281,12.143,19.281z"></path>
+                  <path d="M10.099,5.943c0.837,0,1.516-0.68,1.516-1.516c0-0.834-0.679-1.512-1.516-1.512
+            		c-0.835,0-1.513,0.678-1.513,1.512C8.586,5.263,9.264,5.943,10.099,5.943z M10.099,4.063c0.202,0,0.366,0.165,0.366,0.364
+            		c0,0.401-0.73,0.405-0.73,0C9.734,4.228,9.898,4.063,10.099,4.063z"></path>
+                </g>
+              </g>
+            </svg>
+          </div>
+          </div>
+          <div id="log-display" class="col s12"></div>
+        </div>
       <script type="text/javascript" src="js/jquery.min.js"></script>
       <script src="js/socket.io.js"></script>
       <script type="text/javascript" src="js/materialize.min.js"></script>
+
+      <script type="text/javascript" src="js/jquery.mousewheel-min.js"></script>
+      <script type="text/javascript" src="js/jquery.terminal-min.js"></script>
 
       <script src="js/angular.js"></script>
       <script src="js/angular-route.js"></script>
       <script src="js/socket.js"></script>
 
-      <script type="text/javascript" src="app/app.js"></script>
-      <script type="text/javascript" src="app/controllers.js"></script>
       <script type="text/javascript">
+
+              jQuery(function($, undefined) {
+                  window.terminal = $('#log-display').terminal({
+                    echo: function(arg1) {
+                        this.echo(arg1);
+                    }
+                    },
+                    { greetings: 'Terminal : Master Mind 0.1.5', prompt: '>', height: 150 });
+              });
             window.onload = function() {
+              $('.button-term').on('click', function(e) {
+                var element = $('.log-display-box');/*
+                if(element.css('bottom') === '-150px'){
+                  element.animate({
+                    bottom: 0
+                  }, 600, function() {
+                      // Animation complete.
+                  });
+                }else{
+                  element.animate({
+                    bottom: -150
+                  }, 600, "swing", function() {
+                      // Animation complete.
+                  });
+                }*/
+                if(element.hasClass('open-terminal')){
+                  element.removeClass('open-terminal');
+                }else{
+                element.addClass('open-terminal');
+                }
+              });
                 /*var welcome = document.getElementById("welcome");
                 var allUsers = document.getElementById("users");
                 var progress = $('.pin');
@@ -51,5 +119,9 @@
                 });*/
             }
         </script>
+
+      <script type="text/javascript" src="app/app.js"></script>
+      <script type="text/javascript" src="app/controllers.js"></script>
+
     </body>
   </html>

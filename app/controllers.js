@@ -1,37 +1,117 @@
-game.controller('connectCtrl', ['$scope',
-  function ($scope, socket) {
+game.controller('connectCtrl', ['$scope', 'socket', 'mplayerID', 'permissions',
+  function ($scope, socket, mplayerID, permissions ) {
 
     gameBoard.drowBoard();
-    $scope.welcomeMsg = 'Welcome User!';
+    var secondPlayer;
+
+    $scope.connectionBtn = 'Connectiong ...' + mplayerID.socketID;
+
+    socket.on('welcome', function (data) {
+        $scope.welcomeMsg = data.name;
+        window.terminal.echo('///--- '+data.name+' ---///');
+    });
+
+    var hiddeFunction = function(){
+      $('.hidde-comb').addClass('hidde-comb-animate');
+    };
+
+    socket.on('multiplayer', function (data) {
+        permissions.user = data.status;
+
+        $scope.multiplayerUser = 'You will play with '+data.name;
+        window.terminal.echo('------------------------------');
+        window.terminal.echo('You will play with '+data.name+' ('+mplayerID.status+')');
+        // Connected players name and socet id
+        secondPlayer = data;
+        mplayerID.socketID = data.socketID;
+        mplayerID.status = data.status;
+        //end
+
+        $scope.playersNameMsg = data.name;
+
+    });
+
 
 
   }]);
 
-game.controller('gameCtrl', ['$scope', '$http', '$element',
-  function ($scope, $http, $element) {
+game.controller('gameCtrl', ['$scope', '$http', '$element', 'socket', 'mplayerID', 'permissions', '$route',
+  function ($scope, $http, $element, socket, mplayerID, permissions, $route) {
     var pinboxSelection = '';
     var unlocledRow = 11;
     var unlockButton = 0;
     _combination = [0,0,0,0];
     _combinationSet = [];
 
+    /*
+    * Coming from the players app
+    */
+    socket.on('pin-down', function (data) {
+      window.terminal.echo('---------> user moved pin somewhere');
+      window.terminal.echo(data.position);
+      pinboxSelection = data.pinID;
+      $scope.setPinOnBoard(data.position, 'recived');
+
+    });
+
+    socket.on('check', function (data) {
+      window.terminal.echo('---------> user checking his combination. ??????');
+      $scope.setResult(data.row);
+
+    });
+
+    socket.on('set-combination', function (data) {
+      window.terminal.echo('---------> host user set combination. ******');
+      window.terminal.echo(data.combination);
+      _combinationSet = data.combination;
+      unlocledRow = 1;
+      _combination = [0,0,0,0];
+      $element.find('.resid11-5 .go-button').css('display', 'none');
+      if(permissions.play()){
+        unlocledRow = 1;
+        window.terminal.echo('You can play.');
+      }
+    });
+    /*
+    * End
+    */
+
+    $scope.$on('$routeChangeSuccess', function(next, current) {
+      initGame();
+    });
+
+
+
+    var initGame = function(){
+      if(permissions.setCombination()){
+        unlocledRow = 11;
+        window.terminal.echo('We unlocked the row on '+unlocledRow+'th, because you have: '+permissions.setCombination());
+      }else{
+        unlocledRow = 20;
+        $('.hidde-comb').css('width', '100%');
+        window.terminal.echo('We locked the row on '+unlocledRow+'th');
+      }
+    };
+
+    $scope.testMesage = mplayerID.socketID;
+
 
     $scope.selectPin = function(num){
       if(pinboxSelection !== num){
         if(pinboxSelection === ''){
           pinboxSelection = num;
-          $element.find('.pinbox-item-'+num).css('background', '#000');
+          $element.find('.pinbox-item-'+num).css('border', '#A39F9F solid 1px');
         }else{
-          $element.find('.pinbox-item-'+pinboxSelection).css('background', '#d1d1d1');
-          $element.find('.pinbox-item-'+num).css('background', '#000');
+          $element.find('.pinbox-item-'+pinboxSelection).css('border', 'none');
+          $element.find('.pinbox-item-'+num).css('border', '#A39F9F solid 1px');
           pinboxSelection = num;
         }
-        $element.find('.pinbox-item-'+num).css('background', '#000');
+        $element.find('.pinbox-item-'+num).css('border', '#A39F9F solid 1px');
       }
     };
 
-    $scope.setPinOnBoard = function(position){
-      if( position[0] === unlocledRow ){
+    $scope.setPinOnBoard = function(position, source = ''){
+      if( position[0] === unlocledRow || source === 'recived' ){
         var openGoButton = 1;
         var color = gameBoard.getColor(pinboxSelection);
         $element.find('.pinid'+position[0]+'-'+position[1]+' .spin-ball').css('background', color);
@@ -47,10 +127,22 @@ game.controller('gameCtrl', ['$scope', '$http', '$element',
           unlockButton = 0;
           $element.find('.resid'+position[0]+'-5 .go-button').css('display', 'none');
         }
+
+        if(mplayerID.status === 'guest'){
+          socket.emit('pin-down',{
+            'pinID': pinboxSelection,
+            'position': [position[0], position[1]],
+            'socketID': mplayerID.socketID
+          });
+        }
       }
+
+
+
     };
 
     $scope.setResult = function(val){
+      window.terminal.echo('Checking combination....');
       var win = 1;
       if( val === unlocledRow && unlockButton === 1 ){
         unlocledRow = 20; // lock every row while setting results
@@ -98,32 +190,60 @@ game.controller('gameCtrl', ['$scope', '$http', '$element',
         _combination = [0,0,0,0];
 
         if(win){
-            //Materialize.toast('<span>You Won!</span><a class=&quot;btn-flat yellow-text&quot; href=&quot;#!&quot;>next<a>', 10000);
+             window.terminal.echo('You won! :-)');
              $scope.popupMsg = 'YOU WON!';
              $('#win-model').openModal();
         }else{
+          window.terminal.echo('Not the right combination.');
           if(val === 7){
+            window.terminal.echo('Sorry, you lost! :-(');
             $scope.popupMsg = 'YOU LOST!';
             $('#win-model').openModal();
           }
+        };
+
+        /*
+        * Win status can be:
+        *       0 -> not right comb. and go to another
+        *       1 -> player won
+        *       2 -> player lost (you won)
+        */
+        if(mplayerID.status === 'guest'){
+          window.terminal.echo('you pressed check button.');
+          if(win){
+            var winStatus = win;
+          }else{
+            if(val === 7){
+              var winStatus = 2;
+              };
+          };
+          socket.emit('check',{
+            'row': val,
+            'win': winStatus,
+            'socketID': mplayerID.socketID
+          });
         };
 
     };
   };
 
     $scope.setCombinationInGame = function(){
-    /*  var color, id;
-
-      for(var i = 0; i < _combinationSet.length; i++){
-          color = gameBoard.getColor(_combinationSet[i]);
-          id = i+1
-          $element.find('.comb'+ id +' .spin-ball').css('background', color);
-      }*/
         if(unlockButton === 1) {
           _combinationSet = _combination.slice(0);
           unlocledRow = 1;
           _combination = [0,0,0,0];
           $element.find('.resid11-5 .go-button').css('display', 'none');
+          if(permissions.setCombination()){
+            /*
+            * Send combination to guest player
+            */
+            socket.emit('set-combination',{
+              'combination': _combinationSet,
+              'socketID': mplayerID.socketID
+            });
+            unlocledRow = 20;
+            window.terminal.echo('You can watch!');
+          }
         }
     };
 
@@ -166,7 +286,12 @@ var gameBoard = {
       });
       $('#pinbox').width(board.pinboxWidth).height(board.pinboxHeight);
       $('#pinbox .pin').css('margin-top', board.boardPadding + 'px');
-      $('.spin-ball').width(board.pointWidth).height(board.pointWidth);
+      var ballSize = board.pointWidth / 2;
+      var ballSizeMargin = ballSize / 2;
+      $('.spin-ball').width(ballSize).height(ballSize).css({
+        'margin-left': ballSizeMargin+'px',
+        'margin-top': ballSizeMargin+'px'
+      });
 
       resPercentage = 20;
       var resPointsSize = Math.round((resPercentage / 100) * board.pointWidth);
@@ -196,22 +321,22 @@ var gameBoard = {
         var color = '#d1d1d1';
         switch(colorID) {
           case 1:
-              color = '#CC3300';
+              color = '#F79941';
               break;
           case 2:
-              color = '#009900';
+              color = '#CB262D';
               break;
           case 3:
-              color = '#663300';
+              color = '#5F80C3';
               break;
           case 4:
-              color = '#0099FF';
+              color = '#47B683';
               break;
           case 5:
-              color = '#A7A7A7';
+              color = '#AD59A3';
               break;
           case 6:
-              color = '#5C005C';
+              color = '#818598';
               break;
         }
         return color;

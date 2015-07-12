@@ -1,18 +1,16 @@
+
 #game-table {
     float: left;
-    border: 2px #000 solid;
 }
 #combination {
   position: relative;
     float: left;
     margin-top: 5px;
-    border: 2px #000 solid;
 }
 #pinbox {
   position: absolute;
   right: 0;
   margin-right: 5px;
-  border: 2px #000 solid;
 }
 .pin, .spin-ball {
     position: relative;
@@ -33,12 +31,12 @@
   -moz-border-radius: 50%;
   border-radius: 50%;
 }
-.red-pin { background: #CC3300; }
-.green-pin { background: #009900; }
-.brown-pin { background: #663300; }
-.blue-pin { background: #0099FF; }
-.gray-pin { background: #A7A7A7; }
-.purple-pin { background: #5C005C; }
+.red-pin { background: #F79941; }
+.green-pin { background: #CB262D; }
+.brown-pin { background: #5F80C3; }
+.blue-pin { background: #47B683; }
+.gray-pin { background: #AD59A3; }
+.purple-pin { background: #818598; }
 .empty-pin { background: #d1d1d1; }
 .board-row {
   width: 100%;
@@ -64,6 +62,43 @@
   width: 0px;
   top:0;
   left:0;
-  background: #000;
+  background: #D1D1D1;
   z-index: 200;
+}
+.hidde-comb-animate {
+  width: 100%;
+  transition: all 0.5s ease-in-out;
+}
+.resid11-5 {
+  background: #fff;
+}
+#pinbox .pin {
+  background: #fff;
+}
+.log-display-box {
+  position: fixed;
+  bottom: -150px;
+  z-index: 50000;
+  width: 100%;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  transition: all 0.5s ease-in-out;
+}
+.button-term {
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: #fff;
+  -webkit-box-shadow: 0px -1px 13px 0px rgba(50, 50, 50, 0.61);
+  -moz-box-shadow:    0px -1px 13px 0px rgba(50, 50, 50, 0.61);
+  box-shadow:         0px -1px 13px 0px rgba(50, 50, 50, 0.61);
+}
+.open-terminal {
+  transition: all 0.5s ease-in-out;
+  bottom: 0px;
+}
+.consoleIcon {
+  width: 20px;
+  height: 20px;
+  margin: auto;
 }
